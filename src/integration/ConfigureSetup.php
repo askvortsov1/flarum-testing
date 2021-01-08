@@ -18,11 +18,6 @@ use Flarum\Install\Installation;
 class ConfigureSetup
 {
     /**
-     * Path to this package's vendor directory.
-     */
-    protected $vendorPath;
-
-    /**
      * Test database host.
      *
      * @var string
@@ -94,7 +89,7 @@ class ConfigureSetup
                 'base' => __DIR__.'/tmp',
                 'public' => __DIR__.'/tmp/public',
                 'storage' => __DIR__.'/tmp/storage',
-                'vendor' => $this->vendorPath,
+                'vendor' => __DIR__.'/../../../../',
             ])
         );
 

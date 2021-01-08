@@ -48,7 +48,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             $site = new InstalledSite(
                 new Paths([
                     'base' => __DIR__.'/tmp',
-                    'vendor' => __DIR__.'/../../vendor',
+                    'vendor' => __DIR__.'/../../../../',
                     'public' => __DIR__.'/tmp/public',
                     'storage' => __DIR__.'/tmp/storage',
                 ]),
@@ -63,10 +63,15 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
             $this->populateDatabase();
 
-            $extensionManager = $this->app()->getContainer()->make(ExtensionManager::class);
+            if (count($this->extensions)) {
+                $extensionManager = $this->app()->getContainer()->make(ExtensionManager::class);
 
-            foreach ($this->extensions as $extension) {
-                $extensionManager->enable($extension);
+                foreach ($this->extensions as $extension) {
+                    $extensionManager->enable($extension);
+                }
+
+                // Boot again
+                $this->app = $site->bootApp();
             }
         }
 
