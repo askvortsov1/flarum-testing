@@ -64,15 +64,15 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             $this->populateDatabase();
 
             if (count($this->extensions)) {
-                $this->app()->getContainer()->bind(ExtensionManager::class, ExtensionManagerIncludeCurrent::class);
-                $extensionManager = $this->app()->getContainer()->make(ExtensionManager::class);
+                $container = $this->app()->getContainer();
+                $container->bind(ExtensionManager::class, ExtensionManagerIncludeCurrent::class);
+                $extensionManager = $container->make(ExtensionManager::class);
 
                 foreach ($this->extensions as $extension) {
                     $extensionManager->enable($extension);
                 }
 
-                // Boot again
-                $this->app = $site->bootApp();
+                $extensionManager->extend($container);
             }
         }
 

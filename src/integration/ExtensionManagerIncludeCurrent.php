@@ -22,12 +22,13 @@ class ExtensionManagerIncludeCurrent extends ExtensionManager
     {
         $extensions = parent::getExtensions();
 
-        $package = json_decode($this->filesystem->get($this->paths->vendor.'../composer.json'), true);
+        $package = json_decode($this->filesystem->get($this->paths->vendor.'/../composer.json'), true);
 
-        if (is_null($this->extensions) && Arr::get($package, 'type') === 'flarum-extension') {
-            $current = new Extension($this->paths->vendor.'../', $package);
+        if (Arr::get($package, 'type') === 'flarum-extension') {
+            $current = new Extension($this->paths->vendor.'/../', $package);
             $current->setInstalled(true);
             $current->setVersion(Arr::get($package, 'version'));
+            $current->calculateDependencies([]);
 
             $extensions->put($current->getId(), $current);
 
