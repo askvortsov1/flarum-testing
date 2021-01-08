@@ -10,6 +10,7 @@
 namespace Flarum\Testing\integration;
 
 use Flarum\Extend\ExtenderInterface;
+use Flarum\Extension\ExtensionManager;
 use Flarum\Foundation\Config;
 use Flarum\Foundation\InstalledSite;
 use Flarum\Foundation\Paths;
