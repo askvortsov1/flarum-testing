@@ -4,6 +4,7 @@ composer.phar
 node_modules
 .DS_Store
 Thumbs.db
-/testing/integration/tmp
+/src/integration/tmp
 .vagrant
 .idea/*
+.vscode

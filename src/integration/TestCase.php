@@ -61,6 +61,12 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             $this->database()->beginTransaction();
 
             $this->populateDatabase();
+
+            $extensionManager = $this->app()->getContainer()->make(ExtensionManager::class);
+
+            foreach ($this->extensions as $extension) {
+                $extensionManager->enable($extension);
+            }
         }
 
         return $this->app;
@@ -74,6 +80,16 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     protected function extend(ExtenderInterface ...$extenders)
     {
         $this->extenders = array_merge($this->extenders, $extenders);
+    }
+
+    /**
+     * @var string[]
+     */
+    protected $extensions = [];
+
+    protected function extension(string ...$extensions)
+    {
+        $this->extensions = array_merge($this->extensions, $extensions);
     }
 
     /**
