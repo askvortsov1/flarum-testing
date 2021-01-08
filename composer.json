@@ -1,5 +1,5 @@
 {
-    "name": "flarum/testing",
+    "name": "askvortsov/testing",
     "description": "Automated testing infrastructure for Flarum core and extensions.",
     "keywords": ["forum", "discussion"],
     "homepage": "https://flarum.org/",
