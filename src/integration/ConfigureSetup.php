@@ -59,10 +59,8 @@ class ConfigureSetup
      */
     protected $prefix;
 
-    public function __construct($vendorPath)
+    public function __construct()
     {
-        $this->vendorPath = $vendorPath;
-
         $this->host = getenv('DB_HOST') ?: 'localhost';
         $this->port = intval(getenv('DB_PORT') ?: 3306);
         $this->name = getenv('DB_DATABASE') ?: 'flarum_test';
