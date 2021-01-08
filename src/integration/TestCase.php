@@ -64,6 +64,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             $this->populateDatabase();
 
             if (count($this->extensions)) {
+                $this->app()->getContainer()->bind(ExtensionManager::class, ExtensionManagerIncludeCurrent::class);
                 $extensionManager = $this->app()->getContainer()->make(ExtensionManager::class);
 
                 foreach ($this->extensions as $extension) {
