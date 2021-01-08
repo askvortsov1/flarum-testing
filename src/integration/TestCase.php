@@ -55,25 +55,13 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
                 new Config(include __DIR__.'/tmp/config.php')
             );
 
-            $site->extendWith($this->extenders);
+            $site->extendWith([new OverrideExtensionManagerForTests($this->extensions), ...$this->extenders]);
 
             $this->app = $site->bootApp();
 
             $this->database()->beginTransaction();
 
             $this->populateDatabase();
-
-            if (count($this->extensions)) {
-                $container = $this->app()->getContainer();
-                $container->bind(ExtensionManager::class, ExtensionManagerIncludeCurrent::class);
-                $extensionManager = $container->make(ExtensionManager::class);
-
-                foreach ($this->extensions as $extension) {
-                    $extensionManager->enable($extension);
-                }
-
-                $extensionManager->extend($container);
-            }
         }
 
         return $this->app;
