@@ -15,7 +15,7 @@ class OverrideExtensionManagerForTests implements ExtenderInterface
 
     public function __construct($extensions)
     {
-        $this->$extensions = $extensions;
+        $this->extensions = $extensions;
     }
 
     public function extend(Container $container, Extension $extension = null)
