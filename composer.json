@@ -10,7 +10,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Flarum\\Testing": "src/"
+            "Flarum\\Testing\\": "src/"
         }
     },
     "extra": {
